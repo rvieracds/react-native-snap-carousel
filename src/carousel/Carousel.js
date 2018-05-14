@@ -299,7 +299,12 @@ export default class Carousel extends Component {
 
     _needsScrollView () {
         const { useScrollView } = this.props;
-        return useScrollView || !AnimatedFlatList || this._shouldUseStackLayout() || this._shouldUseTinderLayout();
+        if (IS_IOS){
+            return useScrollView || !AnimatedFlatList || this._shouldUseStackLayout() || this._shouldUseTinderLayout();
+        } else {
+            return true;
+        }
+        // return useScrollView || !AnimatedFlatList || this._shouldUseStackLayout() || this._shouldUseTinderLayout();
     }
 
     _needsRTLAdaptations () {
@@ -733,6 +738,7 @@ export default class Carousel extends Component {
             wrappedRef.scrollTo(options);
         } else {
             wrappedRef.scrollToOffset(options);
+            // wrappedRef.scrollTo(options);
         }
     }
 
